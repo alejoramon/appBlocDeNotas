@@ -19,7 +19,7 @@ const createCategoryService = async (name) => {
       [name]
     );
 
-    if (existingCategory.length > 0) {
+    if (existingCategory && existingCategory.length > 0) {
       throw new Error("La categoría ya existe.");
     }
 
