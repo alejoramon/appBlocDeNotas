@@ -40,7 +40,7 @@ const registerController = async (req, res, next) => {
     console.error("Error en el registro:", error);
     res.status(500).send({
       status: "error",
-      message: "Error interno del servidor al registrar el usuario.🔴",
+      message: "Error interno del servidor.🔴",
     });
   }
 };
