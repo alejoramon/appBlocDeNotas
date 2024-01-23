@@ -20,8 +20,7 @@ const updateCategoryService = async (categoryId, name) => {
     );
     return result;
   } catch (error) {
-    console.error("Error al modificar la categoría:", error);
-    throw new Error("Error interno del servidor al modificar la categoría.");
+    throw error;
   }
 };
 

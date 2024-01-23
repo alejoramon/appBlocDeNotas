@@ -74,16 +74,14 @@ const main = async () => {
     console.log("Categorias creadas!");
     //Aviso de Final de proceso de creación de la BD.
     console.log("¡Base de Datos completa!✅");
-    // Salimos con código 0 en caso de éxito
-    process.exit(0);
   } catch (err) {
     console.error("Error al configurar la base de datos:", err);
 
     // Salimos con código 1 en caso de error
     process.exit(1);
-  } finally {
-    // No es necesario cerrar el proceso aquí, a menos que sea necesario.
   }
+  // Salimos con código 0 en caso de éxito
+  process.exit(0);
 };
 
 // Ejecutamos la función anterior.

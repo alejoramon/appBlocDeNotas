@@ -18,8 +18,7 @@ const deleteCategoryService = async (categoryId) => {
     ]);
     return result;
   } catch (error) {
-    console.error("Error al eliminar la categoría:", error);
-    throw new Error("Error interno del servidor al eliminar la categoría.");
+    throw error("Error interno del servidor al eliminar la categoría.");
   }
 };
 

@@ -11,48 +11,38 @@ dotenv.config();
 //Funcion para logear a un usuario.
 
 const login = async (email, password) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const pool = await getPool();
+  const pool = await getPool();
 
-      // Buscar el usuario en la base de datos usando el email proporcionado.
-      const [user] = await pool.query("SELECT * FROM users WHERE email = ?", [
-        email,
-      ]);
+  // Buscar el usuario en la base de datos usando el email proporcionado.
+  const [user] = await pool.query("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
 
-      console.log("Resultado de la consulta:", user);
+  console.log("Resultado de la consulta:", user);
 
-      if (user.length === 0) {
-        reject("Mail o contraseña incorrecta.🔴");
-        return;
-      }
+  if (user.length === 0) {
+    const objError = new Error("Mail o contraseña incorrecta.🔴");
+    objError.statusCode = 401;
+    throw objError;
+  }
 
-      // Aseguramos que ambos argumentos sean cadenas.
-      const match = await bcrypt.compare(
-        String(password),
-        String(user[0].password)
-      );
+  // Aseguramos que ambos argumentos sean cadenas.
+  const match = await bcrypt.compare(
+    String(password),
+    String(user[0].password)
+  );
 
-      if (!match) {
-        reject("Mail o contraseña incorrecta.🔴");
-        return;
-      }
-      //const tokeninfo = {id:user[0].id,};
+  if (!match) {
+    const objError = new Error("Mail o contraseña incorrecta.🔴");
+    objError.statusCode = 401;
+    throw objError;
+  }
 
-      // Generar un token JWT para el usuario autenticado.
-      const token = jwt.sign({ userId: user[0].id }, process.env.JWT_SECRET, {
-        expiresIn: "30d",
-      });
-      resolve({ userId: user[0].id, token });
-    } catch (error) {
-      console.error("Error al realizar el login:", error);
-      reject("Error interno del servidor🔴");
-    }
-  }).catch((error) => {
-    // Manejar cualquier error no capturado aquí
-    console.error("Error no capturado:", error);
-    throw error; // Esto asegurará que el error se propague y se maneje adecuadamente
+  // Generar un token JWT para el usuario autenticado.
+  const token = jwt.sign({ userId: user[0].id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
   });
+  return { userId: user[0].id, token };
 };
 
 export default login;
