@@ -15,7 +15,7 @@
     - jsonwebtoken      (Manejador el usuario)
     - bcrypt            (Encriptador)
     - joi               (Validador exquemas de datos)
-    - cors              ()
+    - cors              (middleware accesos)
 
 ## ENDPOINTS
 
