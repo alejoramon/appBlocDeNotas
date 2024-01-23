@@ -1,4 +1,4 @@
-/ MÓDULO PARA EL MANEJO DE ERRORES
+// MÓDULO PARA EL MANEJO DE ERRORES
 
 // Función middleware para manejar errores
 const errorHandler = (error, req, res, next) => {
