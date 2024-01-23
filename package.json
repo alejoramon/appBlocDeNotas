@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "app_bloc_de_notas",
+  "name": "BlocDeNotas",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

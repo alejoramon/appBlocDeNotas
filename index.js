@@ -20,6 +20,7 @@ app.use(express.json()); //Parseamos body de las solicitudes a JSON
 // Rutas
 app.use(router);
 app.use(errorHandler); //Manejo de errores (último!!)
+app.use(notFoundHandler); // Middleware para manejar rutas no encontradas
 
 // Iniciamos el servidor
 app.listen(PORT, () => {
