@@ -21,7 +21,10 @@ const loginController = async (req, res, next) => {
     const { email, password } = value;
 
     // Llamamos al servicio de registro desde el userService
-    const { userId, token } = await userService.login(email, password);
+    const { userId, userName, token } = await userService.login(
+      email,
+      password
+    );
 
     // Respuesta exitosa.
     res.status(200).send({
@@ -29,6 +32,7 @@ const loginController = async (req, res, next) => {
       message: "Inicio de sesión exitoso.✅",
       userId,
       token,
+      userName,
     });
   } catch (error) {
     // Manejo de errores.

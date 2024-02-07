@@ -18,8 +18,6 @@ const login = async (email, password) => {
     email,
   ]);
 
-  console.log("Resultado de la consulta:", user);
-
   if (user.length === 0) {
     const objError = new Error("Mail o contraseña incorrecta.🔴");
     objError.statusCode = 401;
@@ -42,7 +40,7 @@ const login = async (email, password) => {
   const token = jwt.sign({ userId: user[0].id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
-  return { userId: user[0].id, token };
+  return { userId: user[0].id, token, userName: user[0].userName };
 };
 
 export default login;
