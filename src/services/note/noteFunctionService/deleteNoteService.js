@@ -1,9 +1,8 @@
 //MÓDULO DE FUNCIONAMIENTO DE SERVICIO BORRADO DE NOTAS
 
-
 // Importamos la bd
-import getPool from '../../../db/getPool.js';
-import dotenv from 'dotenv';
+import getPool from "../../../db/getPool.js";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -13,11 +12,11 @@ export const deleteNoteService = async (notasId) => {
     try {
       // Obtenemos una instancia del pool de conexiones
       const pool = await getPool();
-      
+
       // Intentamos eliminar la nota de la base de datos
       pool.query(
-        'DELETE FROM notas WHERE id = ? AND userId = ?',
-        [notasId, userId],
+        "DELETE FROM notas WHERE id = ?",
+        [notasId],
         (error, results) => {
           if (error) {
             // Si hay un error al ejecutar la consulta, lo rechazamos
@@ -34,7 +33,9 @@ export const deleteNoteService = async (notasId) => {
     } catch (error) {
       // Capturamos cualquier error y lo rechazamos
       console.error("Error al intentar eliminar la nota:🔴", error);
-      reject(new Error("Error interno del servidor al intentar eliminar la nota.🔴"));
+      reject(
+        new Error("Error interno del servidor al intentar eliminar la nota.🔴")
+      );
     }
   });
 };

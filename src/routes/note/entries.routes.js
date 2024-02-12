@@ -13,6 +13,7 @@ import {
   updateNoteController,
   deleteNoteController,
   getUserNoteDetailController,
+  getUserNotesIdController,
   getUserNoteController,
 } from "../../controllers/note/indexNoteController.js";
 import validateAuth from "../../middleware/validateAuth.js"; //Validación de Token
@@ -35,6 +36,7 @@ router.put("/notas/:id", validateAuth, updateNoteController); //Modificar nota
 router.delete("/notas/:id", validateAuth, deleteNoteController); //Eliminar nota
 
 router.get("/notas", validateAuth, getUserNotesController); //Obtener notas
+router.get("/notas/:id", validateAuth, getUserNotesIdController); //Obtener notas
 router.get("/notas/:id/:detail", validateAuth, getUserNoteDetailController); //Obtener nota por detalle
 router.get("/notes/:title", validateAuth, getUserNoteController); //Obtener nota por título
 
