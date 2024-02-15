@@ -17,7 +17,7 @@ const getPool = async () => {
   // Establecemos captura en caso de error de conexiones
   try {
     if (!pool) {
-      console.log("Creando pool de conexiones...");
+      //console.log("Creando pool de conexiones...");
 
       // Creamos pool temporal para dar de alta la Base si es que no existe
       const poolTemp = mysql.createPool({
@@ -37,9 +37,9 @@ const getPool = async () => {
         database: MYSQL_DB,
         timezone: "Z",
       });
-      console.log("Pool de conexiones creado.");
+      //console.log("Pool de conexiones creado.");
     } else {
-      console.log("Usando pool de conexiones existente.");
+      //console.log("Usando pool de conexiones existente.");
     }
 
     // Retornamos el pool de conexiones

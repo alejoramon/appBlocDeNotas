@@ -22,22 +22,14 @@ const deleteNoteController = async (req, res) => {
     // Intentamos eliminar la nota utilizando el servicio
     const isDeleted = await deleteNoteService(id);
 
-    // En función del resultado, enviamos una respuesta adecuada al cliente
-    if (isDeleted) {
-      return res
-        .status(200)
-        .json({ message: "La nota ha sido eliminada con éxito.✅" });
-    } else {
-      return res.status(403).json({
-        error:
-          "No se pudo eliminar la nota. Verifique los permisos o el ID proporcionado.🔴",
-      });
-    }
+    return res
+      .status(200)
+      .json({ message: "La nota ha sido eliminada con éxito.✅" });
   } catch (error) {
     // En caso de un error, enviamos una respuesta de error al cliente
     console.error("Error al intentar eliminar la nota:🔴", error);
     return res.status(500).json({
-      error: "Error interno del servidor al intentar eliminar la nota.🔴",
+      error: error.message,
     });
   }
 };
