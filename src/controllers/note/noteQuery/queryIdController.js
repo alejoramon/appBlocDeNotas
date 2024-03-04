@@ -15,6 +15,7 @@ const getUserNotesIdController = async (req, res) => {
 
     // Utilizamos el servicio para obtener la nota por detalle y userId
     const noteData = await getUserNoteIdService(userId, id);
+    console.log(noteData);
 
     // Comprobamos si se encontró la nota
     if (!noteData || noteData.length === 0) {
@@ -29,12 +30,7 @@ const getUserNotesIdController = async (req, res) => {
     res.status(200).send({
       status: "ok",
       message: "Nota obtenida correctamente.✅",
-      data: {
-        id: noteData[0].id,
-        detail: noteData[0].detail,
-        title: noteData[0].title,
-        text: noteData[0].text,
-      },
+      data: noteData[0],
     });
   } catch (error) {
     // Capturamos cualquier error que ocurra durante la consulta y enviamos una respuesta de error

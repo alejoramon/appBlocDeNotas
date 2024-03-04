@@ -13,7 +13,8 @@ export const getUserNotes = async (userId) => {
 
     // Consulta para obtener la nota por detalle y userId
     const [notesData] = await pool.query(
-      "SELECT id, title, detail, text FROM notas WHERE userId = ?",
+      `SELECT n.id, n.title, n.detail, n.text, n.categoriaId, c.name as categoriaName  FROM notas n 
+      INNER JOIN categorias c ON n.categoriaId = c.Id WHERE n.userId = ?`,
       [userId]
     );
 
